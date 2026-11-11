@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>VoiceChange</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(DomesticSpeechBuild)' == 'true'">
+    <DefineConstants>$(DefineConstants);DOMESTIC_SPEECH</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Android/**/*.cs;Ios/**/*.cs;LocalVoice/**/*.cs" />
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.53.0" />
+    <PackageReference Include="NAudio.WinMM" Version="2.2.1" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(CustomerSpeechKeyFile)' != ''">
+    <EmbeddedResource Include="$(CustomerSpeechKeyFile)" LogicalName="VoiceChange.CustomerSpeechKey" />
+  </ItemGroup>
+</Project>

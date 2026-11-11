@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleIdentifier</key><string>com.voicechange.studio</string>
+  <key>CFBundleDisplayName</key><string>声线工坊</string>
+  <key>CFBundleVersion</key><string>1</string>
+  <key>CFBundleShortVersionString</key><string>1.0</string>
+  <key>LSRequiresIPhoneOS</key><true/>
+  <key>UIDeviceFamily</key><array><integer>1</integer></array>
+  <key>UISupportedInterfaceOrientations</key><array><string>UIInterfaceOrientationPortrait</string></array>
+  <key>UILaunchScreen</key><dict/>
+  <key>UIApplicationSceneManifest</key>
+  <dict>
+    <key>UIApplicationSupportsMultipleScenes</key><false/>
+    <key>UISceneConfigurations</key>
+    <dict>
+      <key>UIWindowSceneSessionRoleApplication</key>
+      <array><dict>
+        <key>UISceneConfigurationName</key><string>VoiceChange</string>
+        <key>UISceneDelegateClassName</key><string>SceneDelegate</string>
+      </dict></array>
+    </dict>
+  </dict>
+  <key>XSAppIconAssets</key><string>Assets.xcassets/AppIcon.appiconset</string>
+  <key>NSMicrophoneUsageDescription</key><string>使用麦克风采集普通话，进行实时识别和变声。</string>
+</dict>
+</plist>

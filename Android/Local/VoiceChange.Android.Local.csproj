@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VoiceChange</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.voicechange.studio.local</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <AndroidPackageFormats>apk</AndroidPackageFormats>
+    <RuntimeIdentifiers>android-arm64;android-x64</RuntimeIdentifiers>
+    <RunAOTCompilation>false</RunAOTCompilation>
+    <PublishTrimmed>false</PublishTrimmed>
+    <AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../LocalVoice/PitchProcessor.cs;../../VoicePreset.cs" />
+    <AndroidResource Include="../Resources/drawable-nodpi/voice_logo.png" Link="Resources/drawable-nodpi/voice_logo.png" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>VoiceChange.Local</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Rvc/**/*.cs" />
+    <Compile Include="../WaveAudio.cs;../VoicePreset.cs" />
+    <PackageReference Include="NAudio.WinMM" Version="2.2.1" />
+  </ItemGroup>
+</Project>
