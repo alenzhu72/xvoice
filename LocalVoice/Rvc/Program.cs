@@ -78,6 +78,38 @@ internal sealed class RvcForm : Form
         {
             status.Text = "无法读取上次的设置，请重新选择目录和模型。";
         }
+        var bundled = Path.Combine(AppContext.BaseDirectory, "RVC20260718Nvidia");
+        if (File.Exists(Path.Combine(bundled, "realtime_gui.py")))
+            runtime.Text = bundled;
+        runtime.TextChanged += (_, _) => RefreshVoices();
+        RefreshVoices();
+    }
+
+    private void RefreshVoices()
+    {
+        var preferred = Path.GetFileNameWithoutExtension(model.Text.Trim());
+        voices.Items.Clear();
+        var root = runtime.Text.Trim().Trim((char)34);
+        if (Directory.Exists(root))
+        {
+            var weights = Path.Combine(root, "assets", "weights");
+            if (Directory.Exists(weights))
+            {
+                foreach (var path in Directory.EnumerateFiles(weights, "*.pth").Order())
+                {
+                    var name = Path.GetFileNameWithoutExtension(path);
+                    if (File.Exists(Path.Combine(root, "assets", "indices", name + ".index")))
+                        voices.Items.Add(name);
+                }
+            }
+        }
+        voices.Items.Add("自选文件");
+        if (voices.Items.Contains(preferred))
+            voices.SelectedItem = preferred;
+        else if (string.IsNullOrWhiteSpace(model.Text) && voices.Items.Contains("kikiV1"))
+            voices.SelectedItem = "kikiV1";
+        else
+            voices.SelectedIndex = voices.Items.Count - 1;
     }
 
     private static void AddPicker(TableLayoutPanel layout, string name, TextBox field, Action browse)
