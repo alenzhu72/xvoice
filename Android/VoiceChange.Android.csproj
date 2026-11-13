@@ -18,7 +18,7 @@
     <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Local/**/*.cs" />
+    <Compile Remove="Local/**/*.cs;Rvc/**/*.cs;Cpu/**/*.cs" />
     <Compile Include="../DomesticSpeech.cs;../MiniMaxSpeech.cs;../SpeechSocket.cs;../LiveVoice.cs;../StreamingPhrase.cs;../VoicePreset.cs" />
     <EmbeddedResource Include="obj/speech-config.txt" LogicalName="VoiceChange.AndroidSpeechConfig" />
   </ItemGroup>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>VoiceChange.GpuClient</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../WindowStyle.cs" />
+    <EmbeddedResource Include="../../Android/Resources/drawable-nodpi/voice_logo.png" LogicalName="XVoice.Logo" />
+    <Compile Include="../GpuConnection.cs;../../WaveAudio.cs;../../VoicePreset.cs" />
+    <PackageReference Include="NAudio.WinMM" Version="2.2.1" />
+  </ItemGroup>
+</Project>
+
+

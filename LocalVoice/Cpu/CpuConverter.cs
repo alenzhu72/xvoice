@@ -23,6 +23,9 @@ internal sealed class CpuConverter : IDisposable
     private readonly float[] previous = new float[Overlap];
     private readonly float[] reduced = new float[ContextSamples / 4];
     private bool hasPrevious;
+#if RVC_QUALITY
+    private readonly QualityModels? quality;
+#endif
 
     public CpuConverter(string directory, string voiceModel = "guanguanV1.onnx", int? graphicsAdapter = null)
     {
@@ -43,6 +46,14 @@ internal sealed class CpuConverter : IDisposable
         try
         {
             generator = new InferenceSession(Path.Combine(directory, voiceModel), options);
+#if RVC_QUALITY
+            try
+            {
+                if (graphicsAdapter.HasValue)
+                    quality = new QualityModels(directory, voiceModel, options);
+            }
+            catch { generator.Dispose(); throw; }
+#endif
         }
         catch
         {
@@ -63,6 +74,9 @@ internal sealed class CpuConverter : IDisposable
             NamedOnnxValue.CreateFromTensor("audio", new DenseTensor<float>(history, [1, ContextSamples]))
         ]);
         var content = encoded.Single().AsTensor<float>().ToArray();
+#if RVC_QUALITY
+        quality?.Retrieve(content, FeatureWidth);
+#endif
         var sourceFrames = content.Length / FeatureWidth;
         for (int frame = 0; frame < Frames; frame++)
         {
@@ -70,6 +84,18 @@ internal sealed class CpuConverter : IDisposable
             content.AsSpan(source, FeatureWidth).CopyTo(features.AsSpan(frame * FeatureWidth));
         }
 
+#if RVC_QUALITY
+        if (quality is not null)
+        {
+            quality.Pitch(history, frequency, MathF.Pow(2, semitones / 12f));
+            for (int frame = 0; frame < Frames; frame++)
+            {
+                float mel = 1127 * MathF.Log(1 + frequency[frame] / 700);
+                pitch[frame] = Math.Clamp((int)MathF.Round((mel - 77.75f) * 254 / 729.2f + 1), 1, 255);
+            }
+        }
+        else
+#endif
         EstimatePitch(semitones);
         using var converted = generator.Run([
             NamedOnnxValue.CreateFromTensor("features", new DenseTensor<float>(features, [1, Frames, FeatureWidth])),

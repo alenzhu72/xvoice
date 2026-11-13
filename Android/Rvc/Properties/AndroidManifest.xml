@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+  <uses-feature android:name="android.hardware.microphone" android:required="true" />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <application android:usesCleartextTraffic="true" android:allowBackup="false" android:label="声线工坊·RVC" android:icon="@drawable/voice_logo" android:theme="@android:style/Theme.Material.NoActionBar" />
+</manifest>
+
+
