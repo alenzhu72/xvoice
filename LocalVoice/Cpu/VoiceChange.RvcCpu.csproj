@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>VoiceChange.RvcCpu</AssemblyName>
+    <AssemblyName Condition="'$(UseDirectML)' == 'true'">VoiceChange.RvcGpu</AssemblyName>
+    <DefineConstants Condition="'$(UseDirectML)' == 'true'">$(DefineConstants);DIRECTML</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../WaveAudio.cs;../../VoicePreset.cs" />
+    <PackageReference Condition="'$(UseDirectML)' != 'true'" Include="Microsoft.ML.OnnxRuntime" Version="1.26.0" />
+    <PackageReference Condition="'$(UseDirectML)' == 'true'" Include="Microsoft.ML.OnnxRuntime.DirectML" Version="1.24.4" />
+    <PackageReference Include="NAudio.WinMM" Version="2.2.1" />
+  </ItemGroup>
+</Project>
+
+
