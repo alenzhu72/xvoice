@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><TargetFramework>net8.0-windows</TargetFramework><OutputType>WinExe</OutputType><UseWindowsForms>true</UseWindowsForms><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><DefineConstants>DIRECTML;RVC_QUALITY</DefineConstants><AssemblyName>VoiceChange.RvcGpu</AssemblyName></PropertyGroup>
+<ItemGroup><Content Include="*.py" CopyToOutputDirectory="PreserveNewest"/><Compile Include="../WaveAudio.cs"/><PackageReference Include="Microsoft.ML.OnnxRuntime.DirectML" Version="1.24.4"/><PackageReference Include="NAudio.WinMM" Version="2.2.1"/></ItemGroup>
+</Project>
+
